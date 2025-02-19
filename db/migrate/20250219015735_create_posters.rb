@@ -1,4 +1,4 @@
-class CreateTasks < ActiveRecord::Migration[7.1]
+class CreatePosters < ActiveRecord::Migration[7.1]
   def change
     create_table :posters do |t|
       t.string :name
