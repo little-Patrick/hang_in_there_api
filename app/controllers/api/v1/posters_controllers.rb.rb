@@ -1,4 +1,4 @@
-class Api::V1::TasksController < ApplicationController
+class Api::V1::PostersController < ApplicationController
 
   def show
     task = Task.find(params[:id])
@@ -27,3 +27,4 @@ class Api::V1::TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :description)
   end
+end
