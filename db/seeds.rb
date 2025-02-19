@@ -7,3 +7,27 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+ Poster.create(name: "REGRET",
+               description: "Hard work rarely pays off.",
+               price: 89.00,
+               year: 2018,
+               vintage: true,
+               img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+  Poster.create(name: "Misery",
+               description: "Test 2",
+               price: 50.01,
+               year: 2001,
+               vintage: false,
+               img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+   Poster.create(name: "okayish",
+               description: "hellow test 3",
+                 price: 112.90,
+               year: 1985,
+               vintage: true,
+               img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create(name: "Test",
+               description: "test description",
+               price: 217.92,
+               year: 1999,
+               vintage: false,
+               img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
