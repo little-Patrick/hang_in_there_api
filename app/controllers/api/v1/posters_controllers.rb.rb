@@ -1,25 +1,23 @@
 class Api::V1::PostersController < ApplicationController
 
   def show
-    task = Task.find(params[:id])
-    render json: TaskSerializer.format(task)
+    render json: Poster.all
   end
 
   def create
-    render json: Task.create(task_params)
+    render json: Poster.create(poster_params)
   end
 
   def update
-    render json: Task.update(params[:id], task_params)
+    render json: Poster.update(params[:id], poster_params)
   end
 
   def destroy
-    render json: Task.delete(params[:id])
+    render json: Poster.delete(params[:id])
   end
 
   def index
-    tasks = Task.all
-    render json: TaskSerializer.format_tasks(tasks)
+    render json: Poster.all
   end
   
   private
