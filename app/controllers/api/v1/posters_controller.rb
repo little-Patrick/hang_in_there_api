@@ -1,10 +1,26 @@
 class Api::V1::PostersController < ApplicationController
   def show
-    render json: Poster.find(params[:id])
+    # render json: Poster.find(params[:id])
+    poster = Poster.find(params[:id])
+    render json: {
+      data: [
+        id: poster.id.to_s,
+        type: "poster",
+        attributes: {
+          name: poster.name, 
+          description: poster.name, 
+          price: poster.price, 
+          year: poster.year, 
+          vintage: poster.vintage, 
+          img_url: poster.img_url, 
+        }
+      ]
+    }
   end
 
   def create
-    render json: Poster.create(poster_params)
+    poster = Poster.create(poster_params)
+    render json: PosterSerializer.format_poster(poster)
   end
 
   def update
@@ -16,12 +32,29 @@ class Api::V1::PostersController < ApplicationController
   end
 
   def index
-    render json: Poster.all
+    # render json: Poster.all
+    poster = Poster.all
+    render json: {
+      data: [
+        {
+          id: poster.id.to_s,
+          type: "poster",
+          attributes: {
+            name: poster.name, 
+            description: poster.name, 
+            price: poster.price, 
+            year: poster.year, 
+            vintage: poster.vintage, 
+            img_url: poster.img_url, 
+          }
+        }
+      ]
+    }
   end
 
   private
 
   def poster_params
-    params.require(:poster).permit(:name, :description, :price, :year, :vintage, :img_url)
+    params.require(:poster).permit(:name, :type, :description, :price, :year, :vintage, :img_url)
   end
 end
