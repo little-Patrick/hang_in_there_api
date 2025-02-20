@@ -1,21 +1,11 @@
 class Api::V1::PostersController < ApplicationController
+  def index
+    posters = Poster.all
+    render json: PosterSerializer.format_posters(posters)
+  end
   def show
-    # render json: Poster.find(params[:id])
     poster = Poster.find(params[:id])
-    render json: {
-      data: [
-        id: poster.id.to_s,
-        type: "poster",
-        attributes: {
-          name: poster.name, 
-          description: poster.name, 
-          price: poster.price, 
-          year: poster.year, 
-          vintage: poster.vintage, 
-          img_url: poster.img_url, 
-        }
-      ]
-    }
+    render json: PosterSerializer.format(poster)
   end
 
   def create
@@ -29,27 +19,6 @@ class Api::V1::PostersController < ApplicationController
 
   def destroy
     render json: Poster.delete(params[:id])
-  end
-
-  def index
-    # render json: Poster.all
-    poster = Poster.all
-    render json: {
-      data: [
-        {
-          id: poster.id.to_s,
-          type: "poster",
-          attributes: {
-            name: poster.name, 
-            description: poster.name, 
-            price: poster.price, 
-            year: poster.year, 
-            vintage: poster.vintage, 
-            img_url: poster.img_url, 
-          }
-        }
-      ]
-    }
   end
 
   private
