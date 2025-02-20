@@ -22,7 +22,7 @@ class Api::V1::PostersController < ApplicationController
   
   private
 
-  def task_params
-    params.require(:task).permit(:title, :description)
+  def poster_params
+    params.require(:poster).permit(:name, :description, :price, :year, :vintage, :img_url)
   end
 end
