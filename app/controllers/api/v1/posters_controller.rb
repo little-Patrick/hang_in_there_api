@@ -1,5 +1,4 @@
 class Api::V1::PostersController < ApplicationController
-
   def show
     # render json: Poster.find(params[:id])
     poster = Poster.find(params[:id])
@@ -52,7 +51,7 @@ class Api::V1::PostersController < ApplicationController
       ]
     }
   end
-  
+
   private
 
   def poster_params
