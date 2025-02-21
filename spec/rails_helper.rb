@@ -36,6 +36,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  Poster.delete_all
   config.before(:suite) do
     Rails.application.load_seed # Load seed data before tests run
   end
