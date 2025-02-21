@@ -5,5 +5,5 @@ class Poster < ApplicationRecord
         else   
             order(created_at: :asc)
         end
-    end
+  end
 end
