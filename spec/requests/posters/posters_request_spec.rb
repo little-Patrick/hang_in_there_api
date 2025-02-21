@@ -1,6 +1,32 @@
 require "rails_helper"
 
 RSpec.describe "Posters endpoints", type: :request do
+  before(:each) do
+    Poster.create!(name: "REGRET",
+                  description: "Hard work rarely pays off.",
+                  price: 89.00,
+                  year: 2018,
+                  vintage: true,
+                  img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create!(name: "Misery",
+                  description: "Test 2",
+                  price: 50.01,
+                  year: 2001,
+                  vintage: false,
+                  img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create(name: "okayish",
+                  description: "hellow test 3",
+                  price: 112.90,
+                  year: 1985,
+                  vintage: true,
+                  img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+    Poster.create(name: "Test",
+                  description: "test description",
+                  price: 217.92,
+                  year: 1999,
+                  vintage: false,
+                  img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
+  end
   it "can send a list of posters" do
     get "/api/v1/posters"
 
@@ -9,7 +35,8 @@ RSpec.describe "Posters endpoints", type: :request do
     posters = JSON.parse(response.body, symbolize_names: true)
     expect(posters[:data].count).to eq(4)
 
-    posters.each do |poster|
+    posters[:data].each do |single_poster|
+      binding.pry
       expect(poster).to have_key(:id)
       expect(poster[:id]).to be_an(Integer)
 

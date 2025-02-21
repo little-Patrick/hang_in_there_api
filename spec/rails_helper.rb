@@ -36,13 +36,6 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  Poster.delete_all
-  config.before(:suite) do
-    Rails.application.load_seed # Load seed data before tests run
-  end
-end
-
-RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
