@@ -21,6 +21,7 @@ class Api::V1::PostersController < ApplicationController
 
   def destroy
     render json: Poster.delete(params[:id])
+    head :no_content
   end
 
   private
