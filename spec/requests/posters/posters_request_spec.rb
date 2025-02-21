@@ -36,7 +36,6 @@ RSpec.describe "Posters endpoints", type: :request do
     expect(posters[:data].count).to eq(4)
 
     posters[:data].each do |single_poster|
-      binding.pry
       expect(poster).to have_key(:id)
       expect(poster[:id]).to be_an(Integer)
 
@@ -58,5 +57,17 @@ RSpec.describe "Posters endpoints", type: :request do
       expect(poster).to have_key(:img_url)
       expect(poster[:img_url]).to be_a(String)
     end
+  end
+
+  it "can send one poster #show" do
+    get "api/v1/posters"
+  end
+
+  it "#create" do
+
+  end
+
+  it "#update" do
+  
   end
 end
