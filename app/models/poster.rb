@@ -13,7 +13,7 @@ class Poster < ApplicationRecord
     end
   end
 
-  def self.max_price(price)
+  def self.max_price
     self.all.select do |poster|
       poster.price <= 99.99
     end
