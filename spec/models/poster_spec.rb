@@ -45,7 +45,8 @@ RSpec.describe Poster, type: :model do
     end
 
     it "filters by max" do 
-
+      filtered_by_max = Poster.max_price
+      expect(filtered_by_max.last.name).to eq("Misery")
     end
 
     it "filters by min" do 
