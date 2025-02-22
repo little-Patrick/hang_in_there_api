@@ -16,7 +16,8 @@ class PosterSerializer
     end
     {
       data: data,
-      meta: {count: [integer]}
+      # meta: {count: [:integer]}
+      meta: {count: data.count}
     }
   end
 
