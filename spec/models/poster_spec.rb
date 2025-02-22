@@ -28,14 +28,28 @@ RSpec.describe Poster, type: :model do
                   img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
   end
 
-    describe "#poster_sorting" do
-      it "sorts tasks asc" do
-        sorted_posters = Poster.poster_sorting('asc')
-        expect(sorted_posters.first.name).to eq("REGRET")
-      end
-      it "sorts tasks desc" do
-        sorted_posters = Poster.poster_sorting('desc')
-        expect(sorted_posters.first.name).to eq("Test")
-      end
+  describe "#poster_sorting" do
+    it "sorts tasks asc" do
+      sorted_posters = Poster.poster_sorting('asc')
+      expect(sorted_posters.first.name).to eq("REGRET")
     end
+    it "sorts tasks desc" do
+      sorted_posters = Poster.poster_sorting('desc')
+      expect(sorted_posters.first.name).to eq("Test")
+    end
+  end
+
+  describe "#poster_filtering" do 
+    it "filters by name" do
+    
+    end
+
+    it "filters by max" do 
+
+    end
+
+    it "filters by min" do 
+
+    end
+  end
 end
