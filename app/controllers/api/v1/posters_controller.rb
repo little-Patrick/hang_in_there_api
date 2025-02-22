@@ -4,7 +4,7 @@ class Api::V1::PostersController < ApplicationController
       posters = Poster.sort_names(params[:name])
       render json: PosterSerializer.format_posters(posters)
     elsif params[:max_price]
-      posters = Poster.max_price(params[:max_price])
+      posters = Poster.max_price
       render json: PosterSerializer.format_posters(posters)
     elsif params[:min_price]
       posters = Poster.min_price(params[:min_price])
@@ -39,6 +39,6 @@ class Api::V1::PostersController < ApplicationController
   private
 
   def poster_params
-    params.require(:poster).permit(:name, :type, :description, :price, :year, :vintage, :img_url)
+    params.require(:poster).permit(:name, :description, :price, :year, :vintage, :img_url)
   end
 end

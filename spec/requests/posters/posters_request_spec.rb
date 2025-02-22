@@ -60,6 +60,7 @@ RSpec.describe "Posters endpoints", type: :request do
     end
   end
 
+
   it "can send one poster #show" do
     get "/api/v1/posters/#{@poster_misery.id}"
 
@@ -94,18 +95,30 @@ RSpec.describe "Posters endpoints", type: :request do
     expect(poster[:img_url]).to be_a(String)
   end
 
-  it "#create" do
-    poster_params = { poster: { name: "New Poster", description: "Cool poster", price: 19.99, year: 1995, vintage: true, img_url: "https://example.com/poster.jpg" } }
-
-    post "/api/v1/posters", params: poster_params
+  it "creates a new poster" do
+    post "/api/v1/posters", params: { 
+      poster: {
+        name: "DARKNESS",
+        description: "There is no light at the end of the tunnel.",
+        price: 2354.00,
+        year: 1873,
+        vintage: true,
+        img_url:  "https://images.unsplash.com/photo-1500206329404-5057e0aefa48?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFya25lc3N8ZW58MHx8MHx8fDA%3D"
+      } 
+    } 
 
     expect(response).to be_successful
-    expect(response.status).to eq(200)
+    poster = JSON.parse(response.body, symbolize_names: true)
 
-    created_poster = JSON.parse(response.body, symbolize_names: true)[:data]
+    expect(poster).to have_key(:id)
+    expect(poster[:id]).to be_an(Integer)
+    expect(poster[:attributes][:name]).to eq("DARKNESS")
+    expect(poster[:attributes][:description]).to eq("There is no light at the end of the tunnel.")
+    expect(poster[:attributes][:price]).to eq(2354.00)
+    expect(poster[:attributes][:year]).to eq(1873)
+    expect(poster[:attributes][:vintage]).to eq(true)
+    expect(poster[:attributes][:img_url]).to eq("https://images.unsplash.com/photo-1500206329404-5057e0aefa48?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFya25lc3N8ZW58MHx8MHx8fDA%3D")
 
-    expect(created_poster[:type]).to eq("poster")
-    expect(created_poster[:attributes][:name]).to eq("New Poster")
   end
 
   it "#update" do
@@ -144,11 +157,12 @@ RSpec.describe "Posters endpoints", type: :request do
     expect(poster[:name]).to eq("updated_poster")
   end
 
-  it "#destroy" do
-    delete "/api/v1/posters/#{@poster_misery.id}"
-
+  it "can destroy a poster" do
+    expect(@regret).to be_a Poster
+  
+    delete "/api/v1/posters/#{@regret.id}"
+  
     expect(response).to be_successful
     expect(response.status).to eq(204)
-
   end
 end
