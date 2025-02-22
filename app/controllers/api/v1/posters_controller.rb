@@ -38,6 +38,6 @@ class Api::V1::PostersController < ApplicationController
   private
 
   def poster_params
-    params.require(:poster).permit(:name, :type, :description, :price, :year, :vintage, :img_url)
+    params.require(:poster).permit(:name, :description, :price, :year, :vintage, :img_url)
   end
 end
