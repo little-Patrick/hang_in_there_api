@@ -151,4 +151,34 @@ RSpec.describe "Posters endpoints", type: :request do
     expect(response.status).to eq(204)
 
   end
+
+  it "routing through name param in index" do
+    get "/api/v1/posters", params: { name: "REGRET" }
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+    posters = JSON.parse(response.body, symbolize_names: true)[:data]
+    expect(posters).to all(include(attributes: include(name: "REGRET")))
+  end
+
+  it "routing through max param in idex" do
+    get "/api/v1/posters", params: { max_price: 100 }
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+    posters = JSON.parse(response.body, symbolize_names: true)[:data]
+    expect(posters).to all(include(attributes: include(price: be <= 100)))
+  end
+
+  it "routing through min param in index" do
+    get "/api/v1/posters", params: { min_price: 90 }
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+    posters = JSON.parse(response.body, symbolize_names: true)[:data]
+    expect(posters).to all(include(attributes: include(price: be >= 90)))
+  end
 end
