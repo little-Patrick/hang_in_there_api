@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Posters endpoints", type: :request do
   before(:each) do
-    Poster.create!(name: "REGRET",
+    @regret = Poster.create!(name: "REGRET",
                   description: "Hard work rarely pays off.",
                   price: 89.00,
                   year: 2018,
@@ -27,7 +27,7 @@ RSpec.describe "Posters endpoints", type: :request do
                   vintage: false,
                   img_url:  "https://plus.unsplash.com/premium_photo-1661293818249-fddbddf07a5d")
   end
-
+  
   xit "can send a list of posters" do
     get "/api/v1/posters"
 
@@ -60,6 +60,7 @@ RSpec.describe "Posters endpoints", type: :request do
     end
   end
 
+
   it "can send one poster #show" do
     get "/api/v1/posters"
   end
@@ -91,5 +92,14 @@ RSpec.describe "Posters endpoints", type: :request do
 
   it "#update" do
   
+  end
+
+  it "can destroy a poster" do
+    expect(@regret).to be_a Poster
+  
+    delete "/api/v1/posters/#{@regret.id}"
+  
+    expect(response).to be_successful
+    expect(response.status).to eq(204)
   end
 end
