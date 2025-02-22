@@ -8,20 +8,20 @@ class Poster < ApplicationRecord
   end
 
   def self.sort_names(name)
-    self.all.select do |poster|
+    all.select do |poster|
       poster.name.downcase.include?(name.downcase)
     end
   end
 
-  def self.max_price
-    self.all.select do |poster|
-      poster.price <= 99.99
-    end
+  def self.max_price(price)
+    all.select do |poster|
+      poster.price <= price
+
   end
 
   def self.min_price(price)
-    self.all.select do |poster|
-      poster.price > 99.99
+    all.select do |poster|
+      poster.price > price
     end
   end
 end

@@ -41,16 +41,18 @@ RSpec.describe Poster, type: :model do
 
   describe "#poster_filtering" do 
     it "filters by name" do
-    
+      sorted_posters = Poster.sort_names("e")
+      expect(sorted_posters.count).to eq(3)
     end
 
     it "filters by max" do 
-      filtered_by_max = Poster.max_price
-      expect(filtered_by_max.last.name).to eq("Misery")
+      sorted_posters = Poster.max_price(60)
+      expect(sorted_posters.count).to eq(1)
     end
 
-    it "filters by min" do 
-
+    it "filters by min" do
+      sorted_posters = Poster.min_price(100)
+      expect(sorted_posters.count).to eq(2)
     end
   end
 end
