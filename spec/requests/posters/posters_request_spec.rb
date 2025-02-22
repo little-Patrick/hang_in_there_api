@@ -149,7 +149,6 @@ RSpec.describe "Posters endpoints", type: :request do
 
     expect(response).to be_successful
     expect(response.status).to eq(204)
-
   end
 
   it "routing through name param in index" do
