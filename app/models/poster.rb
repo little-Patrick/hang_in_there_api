@@ -12,4 +12,16 @@ class Poster < ApplicationRecord
       poster.name.downcase.include?(name.downcase)
     end
   end
+
+  def self.max_price(price)
+    self.all.select do |poster|
+      poster.price <= 99.99
+    end
+  end
+
+  def self.min_price(price)
+    self.all.select do |poster|
+      poster.price > 99.99
+    end
+  end
 end

@@ -3,6 +3,12 @@ class Api::V1::PostersController < ApplicationController
     if params[:name]
       posters = Poster.sort_names(params[:name])
       render json: PosterSerializer.format_posters(posters)
+    elsif params[:max_price]
+      posters = Poster.max_price(params[:max_price])
+      render json: PosterSerializer.format_posters(posters)
+    elsif params[:min_price]
+      posters = Poster.min_price(params[:min_price])
+      render json: PosterSerializer.format_posters(posters)
     else
       sort = params[:sort]
       posters = Poster.poster_sorting(sort)
